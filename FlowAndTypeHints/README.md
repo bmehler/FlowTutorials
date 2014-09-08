@@ -19,7 +19,50 @@ public function getObjectDataByQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterfa
 
 ```
 
-Aber wie kann man ein Interface als type hint setzen. Ein Inteface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt den geprüft werden? Schauen wir uns das QueryInterface doch mal genauer an!
+Aber wie kann man ein Interface als type hint setzen. Ein Inteface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt denn geprüft werden? Schauen wir uns das QueryInterface doch mal genauer an!
+
+```php
+/**
+ * A persistence query interface
+ *
+ * @api
+ */
+	interface QueryInterface {
+...
+/**
+ * Executes the query and returns the result.
+ *
+ * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array The query result object or an array if 		$this->getQuerySettings()->getReturnRawQueryResult() is TRUE
+ * @api
+ */
+public function execute();
+```
+So enthält das QueryInterface z. B. die Funktion execute(). Wie unschwer zu erkennen ist, ist diese als public deklariert und verfügt über keinen Methodenrumpf. Aber wie nun weiter? Naja, das QueryInterface wird doch bestimmt an eine Klasse vererbt, oder? Aber an welche? Achja, an die Query-Klasse. Schauen wir uns diese gleich mal an.
+
+```php
+/**
+ * The Query class used to run queries against the database
+ *
+ * @api
+ */
+class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
+...
+/**
+* Executes the query against the database and returns the result
+*
+* @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array The query result object or an array if $this->getQuerySettings()->getReturnRawQueryResult() is TRUE
+* @api
+*/
+public function execute() {
+	
+	if ($this->getQuerySettings()->getReturnRawQueryResult() === TRUE) {
+		return $this->persistenceManager->getObjectDataByQuery($this);
+	} else {
+		return $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\QueryResultInterface', $this);
+	}
+}
+```
+Jetzt schließt sich der Kreis.
 
 ```php
 <?php
