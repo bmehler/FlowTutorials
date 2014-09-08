@@ -29,7 +29,7 @@ Aber wie kann man ein Interface als type hint setzen? Ein Interface besteht ledi
  */
 interface QueryInterface {
 
-	public function Methodename();
+	public function Methode();
 
 }
 
@@ -44,7 +44,7 @@ Aber wie nun weiter? Naja, das QueryInterface wird doch bestimmt an eine Klasse 
  */
 class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
 
-	public function Methodenname(){}
+	public function Methode(){}
 }
 ```
 Jetzt schließt sich der Kreis. Also passiert nichts anderes als die Prüfung gegen die Query Klasse, wobei und das ist der springende Punkt die Implementierung, also die genau Ausarbeitung der einzelnen Methoden hiervon unabhängig ist und diese geändert bzw. ausgetauscht werden können.
