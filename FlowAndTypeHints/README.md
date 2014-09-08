@@ -18,8 +18,8 @@ public function getObjectDataByQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterfa
 }
 
 ```
-
-Aber wie kann man ein Interface als type hint setzen. Ein Inteface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt denn geprüft werden? Schauen wir uns das QueryInterface doch mal genauer an!
+Wie ihr sehen könnt wird das Object $query der Query Klasse gegen den Type Hint QueryInterface geprüft.
+Aber wie kann man ein Interface als type hint setzen? Ein Interface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt denn geprüft werden? Die QueryInterface Klasse sieht wie folgt aus.
 
 ```php
 /**
@@ -27,17 +27,14 @@ Aber wie kann man ein Interface als type hint setzen. Ein Inteface besteht ledig
  *
  * @api
  */
-	interface QueryInterface {
-...
-/**
- * Executes the query and returns the result.
- *
- * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array The query result object or an array if 		$this->getQuerySettings()->getReturnRawQueryResult() is TRUE
- * @api
- */
-public function execute();
+interface QueryInterface {
+
+	public function <Methodename()>;
+
+}
+
 ```
-So enthält das QueryInterface z. B. die Funktion execute(). Wie unschwer zu erkennen ist, ist diese als public deklariert und verfügt über keinen Methodenrumpf. Aber wie nun weiter? Naja, das QueryInterface wird doch bestimmt an eine Klasse vererbt, oder? Aber an welche? Achja, an die Query-Klasse. Schauen wir uns diese gleich mal an.
+Aber wie nun weiter? Naja, das QueryInterface wird doch bestimmt an eine Klasse vererbt, oder? Aber an welche? Achja, an die Query-Klasse. Schauen wir uns diese gleich mal an.
 
 ```php
 /**
@@ -46,23 +43,13 @@ So enthält das QueryInterface z. B. die Funktion execute(). Wie unschwer zu erk
  * @api
  */
 class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
-...
-/**
-* Executes the query against the database and returns the result
-*
-* @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array The query result object or an array if $this->getQuerySettings()->getReturnRawQueryResult() is TRUE
-* @api
-*/
-public function execute() {
-	
-	if ($this->getQuerySettings()->getReturnRawQueryResult() === TRUE) {
-		return $this->persistenceManager->getObjectDataByQuery($this);
-	} else {
-		return $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\QueryResultInterface', $this);
-	}
-}
+
+	public function <Methodenname(){}>
+
 ```
-Jetzt schließt sich der Kreis. Aber nun zu meinem Bespiel anhand ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist beginnt alles mit der Definition des ClothesInterface. Danach folgt eine abstrakte Klasse Personen, welche lediglich die Property $additons und den Konstruktor beinhaltet. Da das ClothesInterface mit implements an die abstrakte Klasse Person vererbt wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, besteht auch diesen Klassen eine Verbindung zum ClothesInterface. Das spannende an der Programmierung gegen eine Schnittstelle und nicht mit der Implementierung ist, dass die Implementierung, also die getClothing Methode in den beiden Klassen unabhängig ausgearbeitet werden können.
+Jetzt schließt sich der Kreis. Also passiert nichts anderes als die Prüfung gegen die Query Klasse, wobei und das ist der springende Punkt die Implentierung, also die genau Ausarbeitung der einzelnen Methoden hiervon unabhängig ist.
+
+Aber nun zu meinem Bespiel anhand ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist beginnt alles mit der Definition des ClothesInterface. Danach folgt eine abstrakte Klasse Personen, welche lediglich die Property $additons und den Konstruktor beinhaltet. Da das ClothesInterface mit implements an die abstrakte Klasse Person vererbt wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, besteht auch diesen Klassen eine Verbindung zum ClothesInterface.
 
 ```php
 <?php
