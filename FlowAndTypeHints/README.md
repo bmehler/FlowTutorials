@@ -55,7 +55,7 @@ class Consultant extends Person implements ClothesInterface {
 
 class main {
 
-	function getAllClothes(ClothesInterface $person){
+	function getPerson(ClothesInterface $person){
 	
 		echo $person->getClothing();
 	}
@@ -65,13 +65,13 @@ class main {
 echo 'The Doctor<br />';
 $newDoctor = new Doctor('stethoscope');
 $clothes = new main();
-$clothes->getAllClothes($newDoctor);
+$clothes->getPerson($newDoctor);
 
 // A Consultant Object
 echo '<br />The Consultant</br />';
 $newConsultant = new Consultant('tie');
 $clothes = new main();
-$clothes->getAllClothes($newConsultant);
+$clothes->getPerson($newConsultant);
 
 
 ?>
