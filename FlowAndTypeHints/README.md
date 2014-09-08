@@ -62,29 +62,26 @@ public function execute() {
 	}
 }
 ```
-Jetzt schließt sich der Kreis. Mit dem Type Hint zu Beginn werden alle Methoden welche
+Jetzt schließt sich der Kreis. Aber nun zu meinem Bespiel anhand ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist beginnt alles mit der Definition des ClothesInterface. Danach folgt eine abstrakte Klasse Personen, welche lediglich die Property $additons und den Konstruktor beinhaltet. Da das ClothesInterface mit implements an die abstrakte Klasse Person vererbt wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, besteht auch diesen Klassen eine Verbindung zum ClothesInterface. Das spannende an der Programmierung gegen eine Schnittstelle und nicht mit der Implementierung ist, dass die Implementierung, also die getClothing Methode in den beiden Klassen unabhängig ausgearbeitet werden können.
 
 ```php
 <?php
 
-interface ClothesInterface {
-	
+interface ClothesInterface {	
 	public function getClothing();
-
 }
 
-abstract class Person implements ClothesInterface {
+abstract class Person implements ClothesInterface{
 
 	public $additions;
 	
 	public function __construct($additions = NULL) {
 	
-		$this->additions = $additions;
-	
-	}
+		$this->additions = $additions;	
+	}	
 }
 
-class Doctor extends Person implements ClothesInterface {	
+class Doctor extends Person {	
 
 	public function getClothing() {
 		
@@ -97,7 +94,7 @@ class Doctor extends Person implements ClothesInterface {
 
 }
 
-class Consultant extends Person implements ClothesInterface {
+class Consultant extends Person {
 
 	public function getClothing() {
 		
@@ -105,30 +102,28 @@ class Consultant extends Person implements ClothesInterface {
 			return 'He is complete with a suit and tie!';
 		} else {
 			return 'He only wears a suit!';
-		}
+		}	
 	}
+
 }
 
 class main {
 
 	function getPerson(ClothesInterface $person){
 	
-		echo $person->getClothing();
+		echo $person->getClothing();	
 	}
+
 }
 
-// A Doctor Object
 echo 'The Doctor<br />';
 $newDoctor = new Doctor('stethoscope');
 $clothes = new main();
 $clothes->getPerson($newDoctor);
-
-// A Consultant Object
 echo '<br />The Consultant</br />';
 $newConsultant = new Consultant('tie');
 $clothes = new main();
 $clothes->getPerson($newConsultant);
-
-
 ?>
+
 ```
