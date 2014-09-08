@@ -1,7 +1,7 @@
 FlowAndTypeHints: Program to an interface, not an implementation
 ================================================================
 In diesem Tutorial möchte ich mich mit dem <i>Grundsatz Program to an interface, not an implementation</i> beschäftigen.
-Seit geraumer Zeit beschäftige ich mich nun mit Flow bzw. dem in das TYPO3 CMS rückportierte Framework Extbase. Gestern stellte ich mir die Aufgabe den Persitenzmechanismus in Exbase Schritt für Schritt durchzugehen. Dies beginnt, wie die eingefleischten Extbase'ler von euch sicherlich wissen, mit dem Absetzen einer Query im <Model>Repository. Danach werden verschiedene Klassen aufgerufen wie z. B. die Query oder die QueryFactory. Schließlich kommt man zum PersistenceManager, welcher wie der Name schon sagt, das Objekt in die Datenbank schreibt bzw. es aus der Datenbank ließt.
+Seit geraumer Zeit beschäftige ich mich nun mit Flow bzw. dem in das TYPO3 CMS rückportierte Framework Extbase. Gestern stellte ich mir die Aufgabe den Persitenzmechanismus in Exbase Schritt für Schritt durchzugehen. Dies beginnt, wie die eingefleischten Extbase'ler von euch sicherlich wissen, mit dem Absetzen einer Query im <Model>Repository. Danach werden verschiedene Klassen aufgerufen wie z. B. die Query oder die QueryFactory. Schließlich kommt man zum PersistenceManager, welcher wie der Name schon sagt, das Objekt in die Datenbank schreibt bzw. es aus der Datenbank ließt. Zumeist gibt es zur Stammklasse auch ein Interface wie z. B. Query und QueryInterface.
 
 Warum schreibe ich nun über <i>Program to an interface, not an implementation</i>? Kurzum in den oben aufgeführten Klassen fand ich immer wieder type hints welche das übergebene Objekt auf ein Interface hin überprüfen. So z. B.
 
@@ -45,11 +45,11 @@ Aber wie nun weiter? Naja, das QueryInterface wird doch bestimmt an eine Klasse 
 class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
 
 	public function Methodenname(){}
-
+}
 ```
-Jetzt schließt sich der Kreis. Also passiert nichts anderes als die Prüfung gegen die Query Klasse, wobei und das ist der springende Punkt die Implentierung, also die genau Ausarbeitung der einzelnen Methoden hiervon unabhängig ist.
+Jetzt schließt sich der Kreis. Also passiert nichts anderes als die Prüfung gegen die Query Klasse, wobei und das ist der springende Punkt die Implementierung, also die genau Ausarbeitung der einzelnen Methoden hiervon unabhängig ist und diese geändert bzw. ausgetauscht werden können.
 
-Aber nun zu meinem Bespiel anhand ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist beginnt alles mit der Definition des ClothesInterface. Danach folgt eine abstrakte Klasse Personen, welche lediglich die Property $additons und den Konstruktor beinhaltet. Da das ClothesInterface mit implements an die abstrakte Klasse Person vererbt wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, besteht auch diesen Klassen eine Verbindung zum ClothesInterface. Die Prüfung des $person Objektes in unserem Fall ein Objekt der Klasse Doctor oder Consultant geschieht in der Klasse main. Die Klasse prüft nun gegen das ClothesInterface und nicht explizit gegen z. B. die Klasse Doctor. Somit kann abschließend festgehalten werden, dass die Trennung zwischen Interface Type Hint und Implementierung (die explizite Ausarbeitung der Methode) folgenden Vorteil bringt.
+Aber nun zu meinem Bespiel anhand ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist beginnt alles mit der Definition des ClothesInterface. Danach folgt eine abstrakte Klasse Personen, welche lediglich die Property $additions und den Konstruktor beinhaltet. Da das ClothesInterface mit implements an die abstrakte Klasse Person vererbt wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, besteht auch in diesen Klassen eine Verbindung zum ClothesInterface. Die Prüfung des $person Objektes in unserem Fall ein Objekt der Klasse Doctor oder Consultant geschieht in der Klasse main. Die Klasse prüft nun gegen das ClothesInterface und nicht explizit gegen z. B. die Klasse Doctor. Somit kann abschließend festgehalten werden, dass die Trennung zwischen Interface Type Hint und Implementierung (die explizite Ausarbeitung der Methode) folgenden Vorteil bringt.
 Die Trennung zwischen Schnittstelle und Implementierung schützt den Anwender vor Implementierungsdetails. So kann die Implementierung geändert bzw. ausgetauscht werden und der Anwender ist davon nicht betroffen. 
 
 ```php
