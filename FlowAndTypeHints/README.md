@@ -19,8 +19,7 @@ public function getObjectDataByQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterfa
 
 ```
 
-Aber wie kann man ein Interface als type hint setzen. Ein Inteface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt den geprüft werden? Dies möchte ich am nachfolgenden Beispiel diskutieren.
-
+Aber wie kann man ein Interface als type hint setzen. Ein Inteface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt den geprüft werden? Schauen wir uns das QueryInterface doch mal genauer an!
 
 ```php
 <?php
@@ -62,7 +61,7 @@ class Consultant extends Person implements ClothesInterface {
 		if ($this->additions  == 'tie') {
 			return 'He is complete with a suit and tie!';
 		} else {
-			return 'He only wears a suit!';;
+			return 'He only wears a suit!';
 		}
 	}
 }
