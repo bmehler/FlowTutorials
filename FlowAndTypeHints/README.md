@@ -18,9 +18,6 @@ abstract class Person implements ClothesInterface {
 		$this->additions = $additions;
 	
 	}
-	
-	public function getClothing(){}
-	
 }
 
 class Doctor extends Person implements ClothesInterface {	
@@ -44,26 +41,25 @@ class Consultant extends Person implements ClothesInterface {
 			return 'He is complete with a suit and tie!';
 		} else {
 			return 'He only wears a suit!';;
-		}	
-	
+		}
 	}
-
 }
 
 class main {
 
-	function getAllClothes(ClothesInterface $object){
+	function getAllClothes(ClothesInterface $person){
 	
-		echo $object->getClothing();
-	
+		echo $person->getClothing();
 	}
-
 }
 
+// A Doctor Object
 echo 'The Doctor<br />';
 $newDoctor = new Doctor('stethoscope');
 $clothes = new main();
 $clothes->getAllClothes($newDoctor);
+
+// A Consultant Object
 echo '<br />The Consultant</br />';
 $newConsultant = new Consultant('tie');
 $clothes = new main();
