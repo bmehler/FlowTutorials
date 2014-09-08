@@ -3,7 +3,7 @@ FlowAndTypeHints: Program to an interface, not an implementation
 In diesem Tutorial möchte ich mich mit dem <i>Grundsatz Program to an interface, not an implementation</i> beschäftigen.
 Seit geraumer Zeit beschäftige ich mich nun mit Flow bzw. dem in das TYPO3 CMS rückportierte Framework Extbase. Gestern stellte ich mir die Aufgabe den Persitenzmechanismus in Exbase Schritt für Schritt durchzugehen. Dies beginnt, wie die eingefleischten Extbase'ler von euch sicherlich wissen, mit dem Absetzen einer Query im <Model>Repository. Danach werden verschiedene Klassen aufgerufen wie z. B. die Query oder die QueryFactory. Schließlich kommt man zum PersistenceManager, welcher wie der Name schon sagt, das Objekt in die Datenbank schreibt bzw. es aus der Datenbank ließt.
 
-Warum schreibe ich nun über <i>Program to an interface, not an implementation</i>? Kurzum in den oben aufgeführten Klassen fand ich immer wieder type hints welche das übergebene Objekt auf ein Inteface prüfen. So z. B.
+Warum schreibe ich nun über <i>Program to an interface, not an implementation</i>? Kurzum in den oben aufgeführten Klassen fand ich immer wieder type hints welche das übergebene Objekt auf ein Interface hin überprüfen. So z. B.
 
 ```php
 /**
