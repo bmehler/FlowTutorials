@@ -62,7 +62,7 @@ public function execute() {
 	}
 }
 ```
-Jetzt schließt sich der Kreis.
+Jetzt schließt sich der Kreis. Mit dem Type Hint zu Beginn werden alle Methoden welche
 
 ```php
 <?php
