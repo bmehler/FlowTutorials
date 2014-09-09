@@ -55,56 +55,57 @@ Die Trennung zwischen Schnittstelle und Implementierung schützt den Anwender vo
 ```php
 <?php
 
-interface ClothesInterface {	
-	public function getClothing();
+interface ClothesInterface
+{
+    public function getClothing();
 }
 
-abstract class Person implements ClothesInterface{
+abstract class Person implements ClothesInterface
+{
 
-	public $additions;
-	
-	public function __construct($additions = NULL) {
-	
-		$this->additions = $additions;	
-	}	
+    public $additions;
+
+    public function __construct($additions = NULL)
+    {
+        $this->additions = $additions;	
+    }	
 }
 
-class Doctor extends Person {	
-
-	public function getClothing() {
-		
-		if ($this->additions  == 'stethoscope') {
-			return 'A doktor wears a tunic and stethoscope.';
-		} else {
-			return 'He only wears a tunic.';
-		}	
-	}
-
+class Doctor extends Person
+{
+    public function getClothing()
+    {
+        if ($this->additions  == 'stethoscope') {
+            return 'A doktor wears a tunic and stethoscope.';
+        } else {
+            return 'He only wears a tunic.';
+        }	
+    }
 }
 
-class Consultant extends Person {
-
-	public function getClothing() {
-		
-		if ($this->additions  == 'tie') {
-			return 'He is complete with a suit and tie!';
-		} else {
-			return 'He only wears a suit!';
-		}	
-	}
-
+class Consultant extends Person
+{
+    public function getClothing()
+    {		
+        if ($this->additions  == 'tie') {
+            return 'He is complete with a suit and tie!';
+        } else {
+            return 'He only wears a suit!';
+        }
+    }
 }
 
-class main {
-
-	function getPerson(ClothesInterface $person){
-		
-		if ($person instanceOf Doctor || $person instanceOf Consultant) {
-			echo $person->getClothing();	
-		} else {
-			echo 'Das Objekt ist weder eine Instanz der Klasse Doctor noch der Klasse Consultant!';
-		}		
-	}
+class main
+{
+    function getPerson(ClothesInterface $person)
+    {		
+        if ($person instanceOf Doctor || $person instanceOf Consultant) {
+            echo $person->getClothing();	
+        } else {
+            echo 'Das Objekt ist weder eine Instanz der Klasse Doctor';
+            echo 'noch der Klasse Consultant!';
+        }
+    }
 }
 
 echo 'The Doctor<br />';
@@ -116,7 +117,6 @@ echo '<br />The Consultant</br />';
 $newConsultant = new Consultant('tie');
 $person = new main();
 $person->getPerson($newConsultant);
-
 ?>
 
 ```
