@@ -62,7 +62,6 @@ interface ClothesInterface
 
 abstract class Person implements ClothesInterface
 {
-
     public $additions;
 
     public function __construct($additions = NULL)
