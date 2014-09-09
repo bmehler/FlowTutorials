@@ -132,6 +132,6 @@ $person->getPerson($newConsultant);
 
 ```
 
-Abschließend gibt es zu sagen, dass in unserem TYPO3-Beipiel zu Beginn die explizite Ausarbeitung der Methoden der Query-Klasse geändert bzw. ausgetauscht werden können. Das Object aber immer gegen den Inteface Type Hint geprüft wird und so eine Trennung zwischen Sturktur und Implementierung umgesetzt wird.
+Abschließend gibt es zu sagen, dass in unserem TYPO3-Beipiel zu Beginn die expliziten Implementierungen in der Query-Klasse geändert bzw. ausgetauscht werden können ohne das hiervon die Struktur berührt wird. Das Object wird immer gegen den Inteface Type Hint geprüft und so kann eine Trennung zwischen Sturktur und Implementierung sichergestellt werden.
 
 Für eure Aufmerksamkeit danke ich euch und würde mich freuen, wenn ich dem einen oder anderen mit meinen Ausführungen helfen konnte! Natürlich stehe ich Verbesserungen offen gegenüber.
