@@ -20,7 +20,7 @@ public function getObjectDataByQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterfa
 
 ```
 
-Wie ihr sehen könnt wird das Object $query der Query Klasse gegen den Type Hint QueryInterface geprüft.
+Wie ihr sehen könnt wird das Objekt $query der Query Klasse gegen den Type Hint QueryInterface geprüft.
 Aber wie kann man ein Interface als Type Hint setzen? Ein Interface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt denn geprüft werden? Die QueryInterface Klasse sieht wie folgt aus:
 
 ```php
