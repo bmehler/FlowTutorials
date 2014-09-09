@@ -97,7 +97,7 @@ class Consultant extends Person
     public function getClothing()
     {		
         if ($this->additions  == 'tie') {
-            return 'He is complete with a suit and tie!';
+            return 'He is complete! What a wonderful tie!';
         } else {
             return 'He only wears a suit!';
         }
