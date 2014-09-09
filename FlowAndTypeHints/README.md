@@ -50,7 +50,7 @@ class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
 	 * Hier die Implementierung der Methode 
 	 */
 	public function Methode() {
-		if(...) {
+		if (...) {
 			Anweisung;
 		} else {
 			Anweisung;
