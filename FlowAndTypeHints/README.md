@@ -21,7 +21,7 @@ public function getObjectDataByQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterfa
 ```
 
 Wie ihr sehen könnt wird das Objekt $query der Query Klasse gegen den Type Hint QueryInterface geprüft.
-Aber wie kann man ein Interface als Type Hint setzen? Ein Interface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Also gegen was soll das Objekt denn geprüft werden? Die QueryInterface Klasse sieht wie folgt aus:
+Aber warum setzt man ein Interface als Type Hint? Ein Interface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des weiteren über keinen Methodenrumpf. Die QueryInterface Klasse sieht wie folgt aus:
 
 ```php
 /**
@@ -36,7 +36,7 @@ interface QueryInterface {
 }
 
 ```
-Nun aber, wie geht es weiter? Das QueryInterface wird doch bestimmt an eine Klasse vererbt, oder? Aber an welche? Sehen wir doch mal nach ob es zum QueryInterface auch eine Query Klasse finden. Et voilà, und hier ist sie:
+Nun aber, wie geht es weiter? Das QueryInterface wird doch bestimmt an eine Klasse vererbt, oder? Aber an welche? Sehen wir doch mal nach ob es zum QueryInterface auch eine Query Klasse gibt. Et voilà, und hier ist sie:
 
 ```php
 /**
@@ -58,9 +58,9 @@ class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
 	}
 }
 ```
-Jetzt schließt sich der Kreis. Die eigentliche Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface zu deutsch Schnittstelle nicht nur dazu, dass sie Klassen vorschreibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als Eingang in eine Vererbungshierachie gesehen werden. Dies hat den Vorteil, dass nur gegen die Schnittstelle und nicht gegen die Implementierung, welche ja jedesmal anders aussehen kann, geprüft wird.
+Jetzt schließt sich der Kreis. Die eigentliche Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface nicht nur dazu, dass sie Klassen vorschreibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als Zutritt in eine Implementierungshierachie gesehen werden. Dies hat den Vorteil, dass nur gegen das Interface und nicht gegen die Implementierung, welche ja jedesmal anders aussehen kann, geprüft wird.
 
-Aber nun zu meinem Bespiel an welchem ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist, beginnt alles mit der Definition des ClothesInterface. Danach folgt die abstrakte Klasse Personen, welche lediglich die Property $additions und den Konstruktor für die beiden Klassen beinhaltet. Da das ClothesInterface mit implements in der abstrakten Klasse Person implementiert wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, hat in diesen Klassen das ClothesInterface Gültigkeit. Der ClothesInterface Type Hint kommt schließlich in der Klasse main und hier insbesonders in der getPerson() Methode zur Anwendung. Dieser Methode wird ein Objekt $person übergeben, welches dann gegen das ClothesInterface geprüft wird. Dies lässt den Schluss zu, dass die Programmierung gegen Schnittstellen einen entscheidenen Flexibiltätsvorteil hat, da Interface Type Hints kein Interesse an der Implementierung haben. So schützt die Trennung zwischen Schnittstelle und Implementierung den Anwender vor Implementierungsdetails und die Implementierung kann geändert bzw. ausgetauscht werden ohne das der Anwender davon betroffen ist.
+Aber nun zu meinem Bespiel, an welchem ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist, beginnt alles mit der Definition des ClothesInterface. Danach folgt die abstrakte Klasse Personen, welche lediglich die Property $additions und den Konstruktor für die beiden Klassen beinhaltet. Da das ClothesInterface mit implements in der abstrakten Klasse Person implementiert wird und sowohl die Doctor als auch die Consultant Klasse von dieser erbt, hat in diesen Klassen das ClothesInterface Gültigkeit. Der ClothesInterface Type Hint kommt schließlich in der Klasse main und hier insbesonders in der getPerson() Methode zur Anwendung. Dieser Methode wird ein Objekt $person übergeben, welches dann gegen das ClothesInterface geprüft wird. Dies lässt den Schluss zu, dass die Programmierung gegen Schnittstellen einen entscheidenen Flexibiltätsvorteil hat, da hierdurch eine Trennung zwischen Schnittstelle und Implentierung umgesetzt wird. So schützt diese Trennung den Anwender vor Implementierungsdetails und die Implementierung kann geändert bzw. ausgetauscht werden ohne das der Anwender davon betroffen ist.
 
 ```php
 <?php
