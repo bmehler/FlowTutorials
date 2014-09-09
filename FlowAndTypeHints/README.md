@@ -45,8 +45,17 @@ Aber wie nun weiter? Naja, das QueryInterface wird doch bestimmt an eine Klasse 
  * @api
  */
 class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
-
-	public function Methode(){}
+	
+	/**
+	 * Hier die Implementierung der Methode 
+	 */
+	public function Methode() {
+		if(...) {
+			Anweisung;
+		}else {
+			Anweisung;
+		}
+	}
 }
 ```
 Jetzt schließt sich der Kreis. Die eigentliche Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface zu deutsch Schnittstelle nicht nur dazu, dass sie Klassen vorschreibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als Eingang in eine Vererbungshierachie gesehen werden. Dies hat den Vorteil, dass nur gegen die Schnittstelle und nicht gegen die Implementierung, welche ja jedesmal anders aussehen kann, geprüft wird.
