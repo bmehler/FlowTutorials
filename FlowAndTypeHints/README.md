@@ -4,7 +4,7 @@ In diesem Tutorial möchte ich mich mit dem <i>Grundsatz Program to an interface
 
 Seit geraumer Zeit beschäftige ich mich nun mit Flow bzw. dem in das TYPO3 CMS rückportierte Framework Extbase. Gestern stellte ich mir die Aufgabe den Persitenzmechanismus in Exbase Schritt für Schritt durchzugehen. Dies beginnt, wie die eingefleischten Extbase'ler von euch sicherlich wissen, mit dem Absetzen einer Query im <Model>Repository. Danach werden verschiedene Klassen aufgerufen wie z. B. die Query oder die QueryFactory [(siehe Flow Doku zum genauen Query Mechanismus)](http://docs.typo3.org/flow/TYPO3FlowDocumentation/stable/TheDefinitiveGuide/PartIII/Persistence.html). Schließlich kommt man zum PersistenceManager der das Objekt in die Datenbank schreibt bzw. dieses wieder aus der Datenbank ließt. Zumeist gibt es zur Stammklasse auch ein Interface wie z. B. Query und QueryInterface.
 
-Warum schreibe ich nun über <i>Program to an interface, not an implementation</i>? Kurzum: in den oben aufgeführten Klassen fand ich immer wieder type hints welche das übergebene Objekt auf ein Interface hin überprüfen. So z. B.
+Warum schreibe ich nun über <i>Program to an interface, not an implementation</i>? Kurzum: in den oben aufgeführten Klassen fand ich immer wieder Type Hints welche das übergebene Objekt auf ein Interface hin überprüfen. So z. B.
 
 ```php
 /**
