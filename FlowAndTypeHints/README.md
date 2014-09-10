@@ -20,7 +20,7 @@ public function getObjectDataByQuery(\TYPO3\CMS\Extbase\Persistence\QueryInterfa
 
 ```
 
-Wie ihr sehen könnt, wird das Objekt $query der Query Klasse gegen den Type Hint QueryInterface geprüft.
+Wie ihr sehen könnt, wird das Objekt $query gegen das QueryInterface typisiert.
 Aber warum setzt man ein Interface als Type Hint? Ein Interface besteht lediglich aus der Methodendeklaration, welche obligatorisch public ist und verfügt des Weiteren über keinen Methodenrumpf. Die QueryInterface Klasse sieht wie folgt aus:
 
 ```php
@@ -36,7 +36,7 @@ interface QueryInterface {
 }
 
 ```
-Nun aber, wie geht es weiter? Das QueryInterface wird doch bestimmt an eine Klasse vererbt, oder? Aber an welche? Sehen wir doch mal nach ob es zum QueryInterface auch eine Query Klasse gibt. Et voilà, und hier ist sie:
+Nun aber, wie geht es weiter? Das QueryInterface wird doch bestimmt in einer Klasse implementiert, oder? Aber in welcher? Sehen wir doch mal nach ob es zum QueryInterface auch eine Query Klasse gibt. Et voilà, und hier ist sie:
 
 ```php
 /**
@@ -58,9 +58,9 @@ class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
 	}
 }
 ```
-Jetzt schließt sich der Kreis. Die konkrete Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface nicht nur dazu, dass es Klassen vorschreibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als weitere Generalisierung gesehen werden. Dies hat den Vorteil, dass unabhängig von der konkreten Klasse, nur gegen das Interface geprüft wird. 
+Jetzt schließt sich der Kreis. Die konkrete Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface nicht nur dazu, dass es Klassen einen Bauplan mitgibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als weitere Generalisierung gesehen werden. Dies hat den Vorteil, dass unabhängig von der konkreten Klasse, nur gegen das Interface geprüft wird. 
 
-Aber nun zu meinem Bespiel, an welchem ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist, beginnt alles mit der Definition des ClothesInterface. Danach folgt die abstrakte Klasse Personen, welche lediglich die Property $additions und den Konstruktor für die beiden Klassen beinhaltet. Da das ClothesInterface mit implements in der abstrakten Klasse Person implementiert wird, und sowohl die Doctor Klasse als auch die Consultant Klasse von dieser erbt, hat in diesen Klassen das ClothesInterface Gültigkeit. Der ClothesInterface Type Hint kommt schließlich in der Klasse main und hier insbesondere in der getPerson() Methode zur Anwendung. Dieser Methode wird ein Objekt $person übergeben, welches dann gegen das ClothesInterface geprüft wird. 
+Aber nun zu meinem Bespiel, an welchem ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist, beginnt alles mit der Definition des ClothesInterface. Danach folgt die abstrakte Klasse Personen, welche lediglich die Property $additions und den Konstruktor für die beiden Klassen beinhaltet. Da das ClothesInterface mit implements in der abstrakten Klasse Person implementiert wird, und sowohl die Doctor Klasse als auch die Consultant Klasse von dieser erbt, hat in diesen Klassen das ClothesInterface Gültigkeit. Der ClothesInterface Type Hint kommt schließlich in der Klasse main und hier insbesondere in der getPerson() Methode zur Anwendung. Dieser Methode wird ein Objekt $person übergeben, welches dann gegen das ClothesInterface geprüft wird. Die Klassen Doctor oder Consultant sind hierbei nicht mehr von Bedeutung. 
 
 Dies lässt den Schluss zu, dass die Programmierung gegen Schnittstellen einen entscheidenen Flexibiltätsvorteil hat, da hierdurch eine Trennung zwischen Schnittstelle und Implementierung umgesetzt werden kann. Im engeren bedeutet dies, dass bei dem Interface Type Hint eine Generalisierung stattfindet, welche nun nicht mehr die Prüfung auf eine konkrete Klasse in den Vordergrund stellt. Würde man einen Object Type Hint verwenden, so wäre man an eine Konkrete Klasse mit ihren Methoden gebunden. Ferner schützt diese Trennung den Anwender vor Implementierungsdetails und die Implementierung kann geändert bzw. ausgetauscht werden, ohne das der Anwender davon betroffen ist.
 
