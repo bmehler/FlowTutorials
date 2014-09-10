@@ -58,7 +58,7 @@ class Query implements \TYPO3\CMS\Extbase\Persistence\QueryInterface {
 	}
 }
 ```
-Jetzt schließt sich der Kreis. Die konkrete Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface nicht nur dazu, dass es Klassen einen Bauplan mitgibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als weitere Generalisierung gesehen werden. Dies hat den Vorteil, dass unabhängig von der konkreten Klasse, nur gegen das Interface geprüft wird. 
+Jetzt schließt sich der Kreis. Die konkrete Klasse Query tritt bei der Prüfung auf den Type Hint in den Hintergrund. So dient ein Interface nicht nur dazu, dass es Klassen einen Bauplan mitgibt welche Methoden diese beinhalten müssen, sondern muss vielmehr als weitere Generalisierung gesehen werden. Dies hat den Vorteil, dass unabhängig von der konkreten Klasse, nur gegen das Interface typisiert wird. 
 
 Aber nun zu meinem Bespiel, an welchem ich die Programmierung gegen ein Interface erklären möchte. Wie unschwer zu erkennen ist, beginnt alles mit der Definition des ClothesInterface. Danach folgt die abstrakte Klasse Personen, welche lediglich die Property $additions und den Konstruktor für die beiden Klassen beinhaltet. Da das ClothesInterface mit implements in der abstrakten Klasse Person implementiert wird, und sowohl die Doctor Klasse als auch die Consultant Klasse von dieser erbt, hat in diesen Klassen das ClothesInterface Gültigkeit. Der ClothesInterface Type Hint kommt schließlich in der Klasse main und hier insbesondere in der getPerson() Methode zur Anwendung. Dieser Methode wird ein Objekt $person übergeben, welches dann gegen das ClothesInterface geprüft wird. Die Klassen Doctor oder Consultant sind hierbei nicht mehr von Bedeutung. 
 
